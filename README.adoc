@@ -11,20 +11,15 @@ Allows interactive CLI applications to authenticate with web applications behind
 . Your interactive CLI obtains the authentication cookies from STDOUT
 . Your interactive CLI uses the authentication cookies to make requests to the site
 
-== Install
+== Dependencies
 
-[source]
-----
-uv pip install .
-----
-
-This will create an executeable in `./.venv` that your interactive CLI can invoke.
+The only dependency is https://docs.astral.sh/uv/[uv]
 
 == Test
 
 [source]
 ----
-uv run jpl-sso-helper <site-url>
+uvx --from=git+ssh://git@github.com/rfdonnelly/jpl-sso-helper.git jpl-sso-helper <site-url>
 ----
 
 == Usage Example
@@ -34,10 +29,12 @@ uv run jpl-sso-helper <site-url>
 import requests
 import yaml
 
+site_url = ...
+
 session = requests.Session()
 
 # Authenticate with JPL SSO
-result = subprocess.run(["jpl-sso-helper", site_url], capture_output=True)
+result = subprocess.run(["uvx.exe", "--from=git+ssh://git@github.com/rfdonnelly/jpl-sso-helper.git", "jpl-sso-helper", site_url], capture_output=True)
 cookies = yaml.safe_load(result.stdout)
 domain = urlparse(site_url).netloc
 for cookie in cookies:
