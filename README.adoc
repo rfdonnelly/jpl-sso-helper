@@ -2,12 +2,14 @@
 
 Allows interactive CLI applications to authenticate with web applications behind JPL SSO.
 
+https://github.com/user-attachments/assets/04325b43-73ce-440d-9317-97716892c995
+
 == How it Works
 
 . Your interactive CLI application calls: `jpl-sso-helper <site-url>`
 . JPL SSO helper opens the site URL using Chrome
-. You authenticate with JPL SSO interactively
-. Once you have authenticated, JPL SSO helper will print the authentication cookies to STDOUT in YAML and terminate
+. The user authenticates with JPL SSO interactively
+. Once the user has authenticated, JPL SSO helper will print the authentication cookies to STDOUT in YAML and terminate
 . Your interactive CLI obtains the authentication cookies from STDOUT
 . Your interactive CLI uses the authentication cookies to make requests to the site
 
