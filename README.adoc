@@ -2,8 +2,6 @@
 
 Allows interactive CLI applications to authenticate with web applications behind SSO.
 
-https://github.com/user-attachments/assets/04325b43-73ce-440d-9317-97716892c995
-
 == How it Works
 
 . Your interactive CLI application calls: `sso-helper <site-url>`
