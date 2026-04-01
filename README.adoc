@@ -21,11 +21,7 @@ The only dependency is https://docs.astral.sh/uv/[uv]
 
 [source]
 ----
-<<<<<<< HEAD
-uv run sso-helper <site-url>
-=======
-uvx --from=git+ssh://git@github.com/rfdonnelly/jpl-sso-helper.git jpl-sso-helper <site-url>
->>>>>>> ee65b8b1770a2750604a55037738d6f377660fe6
+uvx --from=git+ssh://git@github.com/rfdonnelly/sso-helper.git sso-helper <site-url>
 ----
 
 == Usage Example
