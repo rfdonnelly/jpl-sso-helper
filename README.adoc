@@ -1,13 +1,13 @@
-= JPL SSO Helper
+= SSO Helper
 
-Allows interactive CLI applications to authenticate with web applications behind JPL SSO.
+Allows interactive CLI applications to authenticate with web applications behind SSO.
 
 == How it Works
 
-. Your interactive CLI application calls: `jpl-sso-helper <site-url>`
-. JPL SSO helper opens the site URL using Chrome
-. You authenticate with JPL SSO interactively
-. Once you have authenticated, JPL SSO helper will print the authentication cookies to STDOUT in YAML and terminate
+. Your interactive CLI application calls: `uvx --from=git+ssh://git@github.com/rfdonnelly/sso-helper.git sso-helper <site-url>`
+. SSO helper opens the site URL using Chrome
+. You authenticate with SSO interactively
+. Once you have authenticated, SSO helper will print the authentication cookies to STDOUT in YAML and terminate
 . Your interactive CLI obtains the authentication cookies from STDOUT
 . Your interactive CLI uses the authentication cookies to make requests to the site
 
@@ -24,7 +24,7 @@ This will create an executeable in `./.venv` that your interactive CLI can invok
 
 [source]
 ----
-uv run jpl-sso-helper <site-url>
+uv run sso-helper <site-url>
 ----
 
 == Usage Example
@@ -36,8 +36,8 @@ import yaml
 
 session = requests.Session()
 
-# Authenticate with JPL SSO
-result = subprocess.run(["jpl-sso-helper", site_url], capture_output=True)
+# Authenticate with SSO
+result = subprocess.run(f"uvx --from=git+ssh://git@github.com/rfdonnelly/sso-helper.git sso-helper {site_url}".split(), capture_output=True)
 cookies = yaml.safe_load(result.stdout)
 domain = urlparse(site_url).netloc
 for cookie in cookies:
