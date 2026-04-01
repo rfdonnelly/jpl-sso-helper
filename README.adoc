@@ -2,29 +2,30 @@
 
 Allows interactive CLI applications to authenticate with web applications behind SSO.
 
+https://github.com/user-attachments/assets/04325b43-73ce-440d-9317-97716892c995
+
 == How it Works
 
-. Your interactive CLI application calls: `uvx --from=git+ssh://git@github.com/rfdonnelly/sso-helper.git sso-helper <site-url>`
+. Your interactive CLI application calls: `sso-helper <site-url>`
 . SSO helper opens the site URL using Chrome
-. You authenticate with SSO interactively
-. Once you have authenticated, SSO helper will print the authentication cookies to STDOUT in YAML and terminate
+. The user authenticates with SSO interactively
+. Once the user has authenticated, SSO helper will print the authentication cookies to STDOUT in YAML and terminate
 . Your interactive CLI obtains the authentication cookies from STDOUT
 . Your interactive CLI uses the authentication cookies to make requests to the site
 
-== Install
+== Dependencies
 
-[source]
-----
-uv pip install .
-----
-
-This will create an executeable in `./.venv` that your interactive CLI can invoke.
+The only dependency is https://docs.astral.sh/uv/[uv]
 
 == Test
 
 [source]
 ----
+<<<<<<< HEAD
 uv run sso-helper <site-url>
+=======
+uvx --from=git+ssh://git@github.com/rfdonnelly/jpl-sso-helper.git jpl-sso-helper <site-url>
+>>>>>>> ee65b8b1770a2750604a55037738d6f377660fe6
 ----
 
 == Usage Example
@@ -34,10 +35,12 @@ uv run sso-helper <site-url>
 import requests
 import yaml
 
+site_url = ...
+
 session = requests.Session()
 
 # Authenticate with SSO
-result = subprocess.run(f"uvx --from=git+ssh://git@github.com/rfdonnelly/sso-helper.git sso-helper {site_url}".split(), capture_output=True)
+result = subprocess.run(["uvx.exe", "--from=git+ssh://git@github.com/rfdonnelly/sso-helper.git", "sso-helper", site_url], capture_output=True)
 cookies = yaml.safe_load(result.stdout)
 domain = urlparse(site_url).netloc
 for cookie in cookies:
